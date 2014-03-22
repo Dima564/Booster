@@ -1,6 +1,8 @@
 package com.slidinglayersample;
 
 import android.util.Log;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,7 +16,7 @@ import java.net.URL;
  */
 public class ServerFetcher {
 
-    public static final String TAG = "Tag-PhotoFetcher";
+    public static final String TAG = "Tag-ServerFetcher";
 
     public static final String PREF_SEARCH_QUERY = "searchQuery";
 
@@ -22,8 +24,10 @@ public class ServerFetcher {
 
     public static final String ENDPOINT = "http://192.168.1.105:8000/";
 
+    public static final String ID = "id";
 
-    public byte[] getUrlBytes(String urlSpec) throws IOException {
+
+    public static byte[] getUrlBytes(String urlSpec) throws IOException {
         URL url = new URL(urlSpec);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -48,99 +52,58 @@ public class ServerFetcher {
     }
 
 
-    public String getUrl(String urlSpec) throws IOException {
+    public static String getUrl(String urlSpec) throws IOException {
         return new String(getUrlBytes(urlSpec));
     }
 
 
-    public String registerUser(User user) {
+    public static String authorizeUser(User user) {
 
         try {
 
+            String request = ENDPOINT + "api/auth.signin/?" +
+                    "username=" + user.getNickname() + "&" +
+                    "password=" + user.getPassword();
+
+            String response = getUrl(request);
+            JSONObject obj = (JSONObject) new JSONTokener(response)
+                    .nextValue();
+
+            String userId = obj.getString(ID);
+
+            return userId;
 
         } catch (Exception e) {
-            Log.e(TAG, "Failed to fetch items", e);
+            Log.e(TAG, "Failed to authorize user", e);
         }
 
         return null;
     }
 
-    public ArrayList<GalleryItem> downloadGalleryItems(String url) {
 
-        ArrayList<GalleryItem> list = new ArrayList<GalleryItem>();
+    public static String registerUser(User user) {
 
         try {
-            String xmlString = getUrl(url);
 
-//            Log.i(TAG, "Received xml: " + xmlString);
+            String request = ENDPOINT + "api/auth.signup/?" +
+                    "username=" + user.getNickname() + "&" +
+                    "email=" + user.getEmail() + "&" +
+                    "password=" + user.getPassword();
 
-            XmlPullParserFactory factory = null;
+            String response = getUrl(request);
+            JSONObject obj = (JSONObject) new JSONTokener(response)
+                    .nextValue();
 
+            String userId = obj.getString(ID);
 
-            factory = XmlPullParserFactory.newInstance();
-            XmlPullParser parser = factory.newPullParser();
-            parser.setInput(new StringReader(xmlString));
+            return userId;
 
-            parseItems(list, parser);
-
-            return list;
-
-
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            Log.e(TAG, "Failed to fetch items", e);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to register user", e);
         }
 
-        return list;
-    }
-
-    public ArrayList<GalleryItem> fetchItems(/*Integer page*/) {
-
-        String url = Uri.parse(ENDPOINT).buildUpon()
-                .appendQueryParameter("method", METHOD_GET_RECENT)
-                .appendQueryParameter("api_key", API_KEY)
-                .appendQueryParameter(PARAM_EXTRAS, EXTRA_SMALL_URL)
-//                .appendQueryParameter(PARAM_OPTIONAL_PAGE, page.toString())
-//                .appendQueryParameter(PARAM_OPTIONAL_PER_PAGE, NUMBER_PER_PAGE)
-                .build().toString();
-        return downloadGalleryItems(url);
-    }
-
-    public ArrayList<GalleryItem> search(String query) {
-        String url = Uri.parse(ENDPOINT).buildUpon()
-                .appendQueryParameter("method", METHOD_SEARCH)
-                .appendQueryParameter("api_key", API_KEY)
-                .appendQueryParameter(PARAM_EXTRAS, EXTRA_SMALL_URL)
-                .appendQueryParameter(PARAM_TEXT, query)
-                .build().toString();
-        return downloadGalleryItems(url);
+        return null;
     }
 
 
-    void parseItems(ArrayList<GalleryItem> items, XmlPullParser parser) throws IOException, XmlPullParserException {
-
-        int eventType = parser.next();
-
-        while (XmlPullParser.END_DOCUMENT != eventType) {
-
-            if (eventType == XmlPullParser.START_TAG
-                    && XML_PHOTO.equals(parser.getName())) {
-
-                String id = parser.getAttributeValue(null, "id");
-                String caption = parser.getAttributeValue(null, "title");
-                String smallUrl = parser.getAttributeValue(null, EXTRA_SMALL_URL);
-                String owner = parser.getAttributeValue(null, "owner");
-
-
-                GalleryItem item = new GalleryItem();
-                item.setId(id)
-                        .setCaption(caption)
-                        .setUrl(smallUrl)
-                        .setOwner(owner);
-                items.add(item);
-            }
-            eventType = parser.next();
-        }
-    }
 }

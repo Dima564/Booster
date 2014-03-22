@@ -1,7 +1,9 @@
 package com.slidinglayersample;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,9 @@ public class RegisterActivity extends Activity {
     private EditText mEditEmail;
     private EditText mEditPhone;
     private EditText mEditDateOfBirth;
+
+
+    ProgressDialog dlg;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -77,8 +82,16 @@ public class RegisterActivity extends Activity {
 
                     return;
                 } else {
-                    User.authorizeUser(user);
-                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+
+
+                    dlg = new ProgressDialog(RegisterActivity.this);
+                    dlg.setTitle("Please wait.");
+                    dlg.setMessage("Registration.  Please wait.");
+                    dlg.show();
+
+                    new RegisterUserTask().execute(user);
+
+
                 }
             }
         });
@@ -87,5 +100,57 @@ public class RegisterActivity extends Activity {
 
     public boolean isEmpty(String s) {
         return s.trim().length() == 0;
+    }
+
+    class RegisterUserTask extends AsyncTask<User, Void, User> {
+
+        @Override
+        protected User doInBackground(User... params) {
+
+
+            User user = params[0];
+            String result = ServerFetcher.registerUser(user);
+
+            user.setId(result);
+
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(User s) {
+            if (dlg != null && dlg.isShowing()) {
+                dlg.dismiss();
+            }
+
+            if (s.getId() != "-1") {
+                if (User.authorizeUser(s)) {
+                    SuperToast toast = new SuperToast(RegisterActivity.this);
+
+                    toast.setText("You are successfully registered :)");
+                    toast.setAnimations(SuperToast.Animations.FADE);
+
+                    toast.setDuration(SuperToast.Duration.SHORT);
+                    toast.setBackground(SuperToast.Background.BLUE);
+                    toast.setTextSize(SuperToast.TextSize.MEDIUM);
+                    toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
+
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    return;
+                }
+                ;
+            }
+
+            SuperToast toast = new SuperToast(RegisterActivity.this);
+
+            toast.setText("Registration failed, try again");
+            toast.setAnimations(SuperToast.Animations.FADE);
+
+            toast.setDuration(SuperToast.Duration.SHORT);
+            toast.setBackground(SuperToast.Background.RED);
+            toast.setTextSize(SuperToast.TextSize.MEDIUM);
+            toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
+
+
+        }
     }
 }
