@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/blue_vacation_desktop"
+        >
+
+
+    <ScrollView
+            android:id="@+id/login_form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <LinearLayout
+                style="@style/LoginFormContainer"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                >
+
+            <EditText
+                    android:id="@+id/reg_nickname"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_username"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:layout_margin="5dp"
+
+                    android:singleLine="true"/>
+
+            <EditText
+                    android:id="@+id/reg_full_name"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_full_name"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:layout_margin="5dp"
+
+                    android:singleLine="true"/>
+
+            <EditText
+                    android:id="@+id/reg_password"
+                    android:layout_width="300dp"
+
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_password"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:layout_margin="5dp"
+                    />
+
+            <EditText
+                    android:id="@+id/reg_email"
+                    android:layout_width="300dp"
+
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:layout_margin="5dp"
+
+                    android:singleLine="true"/>
+
+            <EditText
+                    android:id="@+id/reg_phone"
+                    android:layout_width="300dp"
+
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_phone"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:layout_margin="5dp"
+
+                    android:singleLine="true"/>
+
+            <EditText
+                    android:id="@+id/reg_birth_date"
+                    android:layout_width="300dp"
+
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_date"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:layout_margin="5dp"
+
+                    android:singleLine="true"/>
+
+
+            <RelativeLayout
+                    android:layout_width="300dp"
+
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_margin="5dp"
+                    >
+
+                <Button
+                        android:id="@+id/btnRegister"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/ButtonRed"
+
+                        android:text="@string/action_register__short"
+                        android:layout_margin="5dp"
+
+
+                        />
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
