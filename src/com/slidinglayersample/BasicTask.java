@@ -6,11 +6,11 @@ package com.slidinglayersample;
  */
 public class BasicTask {
 
-    private String mId;
+    private String mId = "12";
 
-    private String mName;
+    private String mName = "Base Name";
 
-    private String mDescription;
+    private String mDescription = "This is the description";
 
     public String getId() {
         return mId;

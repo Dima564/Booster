@@ -76,6 +76,9 @@
                   android:launchMode="singleTop"
 
                 />
+        <activity android:name=".CompanyProfileActivity"
+                  android:theme="@style/Theme.TranslucentActionBar.ActionBar.Overlay"
+                />
 
 
     </application>

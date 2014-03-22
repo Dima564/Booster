@@ -42,12 +42,18 @@ public class RegisterOrSignInActivity extends Activity {
                 newUser.setPassword(password);
 
 
-                dlg = new ProgressDialog(RegisterOrSignInActivity.this);
-                dlg.setTitle("Please wait.");
-                dlg.setMessage("Authorization.  Please wait.");
-                dlg.show();
+//                dlg = new ProgressDialog(RegisterOrSignInActivity.this);
+//                dlg.setTitle("Please wait.");
+//                dlg.setMessage("Authorization.  Please wait.");
+//                dlg.show();
+//
+//                new AuthorizeUserTask().execute(newUser);
 
-                new AuthorizeUserTask().execute(newUser);
+                User.authorizeUser(newUser);
+
+                RegisterOrSignInActivity.this.finish();
+
+                startActivity(new Intent(RegisterOrSignInActivity.this, MainActivity.class));
 
 
             }
@@ -125,5 +131,6 @@ public class RegisterOrSignInActivity extends Activity {
         toast.setTextSize(SuperToast.TextSize.MEDIUM);
         toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
 
+        toast.show();
     }
 }

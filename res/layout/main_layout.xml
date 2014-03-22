@@ -1,80 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<android.support.v4.widget.DrawerLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
 
+        >
 
-
-    <TextView
-            android:id="@+id/txtrofile"
+    <FrameLayout
+            android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:text="Profile"
-
-            style="@style/TextStyle"
-
+            android:layout_height="match_parent"
+            android:padding="3dp"
             />
 
-    <com.slidinglayer.SlidingLayer
-            android:id="@+id/slidingLayer1"
-            android:layout_width="@dimen/layer_width"
-            android:layout_height="match_parent"
-            >
-        <!--slidingLayer:shadowDrawable="@drawable/sidebar_shadow"
-            slidingLayer:shadowWidth="@dimen/shadow_width"
-            slidingLayer:offsetWidth="@dimen/offset_width"
-            slidingLayer:stickTo="auto|right|left|middle"
-            slidingLayer:closeOnTapEnabled="true">-->
 
-        <FrameLayout
+    <!-- <com.slidinglayer.SlidingLayer
+             android:id="@+id/slidingLayer1"
+             android:layout_width="@dimen/layer_width"
+             android:layout_height="match_parent"
+             >
+         slidingLayer:shadowDrawable="@drawable/sidebar_shadow"
+             slidingLayer:shadowWidth="@dimen/shadow_width"
+             slidingLayer:offsetWidth="@dimen/offset_width"
+             slidingLayer:stickTo="auto|right|left|middle"
+             slidingLayer:closeOnTapEnabled="true">-->
+
+
+    <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#ff14ad8f"
+            android:orientation="vertical"
+            android:id="@+id/drawer_linear_layout"
+            >
+
+
+        <Button
+                android:id="@+id/txtProfile"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#ff14ad8f"
+                android:text="Profile"
+                android:textSize="22dp"
+                style="@style/nowCardStyle"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:layout_height="wrap_content"
+                android:minHeight="10dp"
+
+                />
+        <View
+                android:layout_marginTop="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray"
+                />
+
+
+        <ListView
+                android:id="@+id/listViewCompany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 >
 
-            <TextView
-                    android:id="@+id/txtProfile"
-                    android:layout_width="match_parent"
-                    android:text="Profile"
+        </ListView>
 
-                    style="@style/TextStyle"
+        <View
+                android:layout_marginTop="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray"
+                />
+        <Button
+                android:id="@+id/txtArchived"
+                android:layout_width="match_parent"
+                android:text="@string/text_Archived"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="7dp"
+                />
+        <View
+                android:layout_marginTop="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray"
+                />
+        <Button
+                android:id="@+id/txtExploreBoster"
+                android:layout_width="match_parent"
+                android:text="@string/text_explore_booster"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="7dp"
 
-                    />
+                />
+        <View
+                android:layout_marginTop="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray"
+                />
 
-            <ListView
-                    android:id="@+id/listViewCompany"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-
-            </ListView>
-
-
-
-            <TextView
-                    android:id="@+id/txtArchived"
-                    android:layout_width="match_parent"
-                    android:text="Profile"
-
-                    style="@style/TextStyle"
-
-                    />
-
-            <TextView
-                    android:id="@+id/txtProfile"
-                    android:layout_width="match_parent"
-                    android:text="Profile"
-
-                    style="@style/TextStyle"
-
-                    />
-
-        </FrameLayout>
+    </LinearLayout>
 
 
-    </com.slidinglayer.SlidingLayer>
+    <!--</com.slidinglayer.SlidingLayer>-->
 
 
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

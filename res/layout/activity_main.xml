@@ -70,6 +70,7 @@
                     android:layout_gravity="center"
                     />
             <Button
+
                     android:id="@+id/buttonClose"
                     style="@style/ButtonRed"
                     android:onClick="buttonClicked"

@@ -166,5 +166,6 @@ public class RegisterActivity extends Activity {
         toast.setTextSize(SuperToast.TextSize.MEDIUM);
         toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
 
+        toast.show();
     }
 }

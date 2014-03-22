@@ -16,6 +16,20 @@ public class Task extends BasicTask {
 
     private int mMaxValue;
 
+    public Task() {
+
+        mStartDate = System.currentTimeMillis();
+
+        mDueDate = System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 5;
+
+        mDone = false;
+
+        mConfirmed = false;
+
+        mMaxValue = 10;
+
+    }
+
     public long getStartDate() {
         return mStartDate;
     }

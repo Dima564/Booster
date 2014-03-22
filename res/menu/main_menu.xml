@@ -5,7 +5,7 @@
         >
     <item
             android:icon="@android:drawable/ic_menu_add"
-            android:id="@+id/action_new_ompany"
+            android:id="@+id/action_new_company"
             android:showAsAction="ifRoom|withText"
             android:title="@string/action_new_company"/>
     <item

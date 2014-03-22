@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff14ad8f"
+            android:orientation="vertical"
+            >
+
+        <Button
+                android:id="@+id/txtProfile"
+                android:layout_width="match_parent"
+
+                android:text="Profile"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="7dp"
+
+                />
+
+        <ListView
+                android:id="@+id/listViewCompany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+        </ListView>
+
+
+        <TextView
+                android:id="@+id/txtArchived"
+                android:layout_width="match_parent"
+                android:text="@string/text_Archived"
+                style="@style/TextStyle"
+                />
+
+        <TextView
+                android:id="@+id/txtExploreBoster"
+                android:layout_width="match_parent"
+                android:text="@string/text_explore_booster"
+
+                style="@style/TextStyle"
+
+                />
+
+    </LinearLayout>
+
+</LinearLayout>

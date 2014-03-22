@@ -5,7 +5,7 @@ package com.slidinglayersample;
  * @since 3/22/14 7:54 AM
  */
 public class Company extends BasicTask {
-    private String mCreatorId;
+    private String mCreatorId = "Andriy Bas";
 
     public String getCreatorId() {
         return mCreatorId;

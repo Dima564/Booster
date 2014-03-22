@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/nowCardStyle"
+        android:minHeight="150dp"
+        >
+
+    <ImageView
+            android:id="@+id/img_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_world"
+            android:layout_weight="1"
+            android:src="@drawable/company"
+            />
+
+    <LinearLayout
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+        <TextView
+
+                android:id="@+id/compny_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Company Name"
+                android:textStyle="bold"
+                android:padding="2dp"
+                android:layout_marginBottom="3dp"
+                />
+
+        <TextView
+                android:id="@+id/company_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_margin="3dp"
+                android:textSize="15dp"
+                android:text="I'm cool company\nProjects : 10\nTasks : 27"
+                />
+    </LinearLayout>
+
+</LinearLayout>
