@@ -26,7 +26,10 @@
 package com.slidinglayersample;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import com.slidinglayer.SlidingLayer;
 
@@ -47,6 +50,22 @@ public class MainActivity extends Activity {
 //        getPrefs();
 //        bindViews();
 //        initState();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        menu.findItem(R.id.action_sign_out).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                User.signOutUser();
+                MainActivity.this.finish();
+                startActivity(new Intent(MainActivity.this, RegisterOrSignInActivity.class));
+                return true;
+            }
+        });
+        return true;
     }
 
    /* @SuppressLint("NewApi")

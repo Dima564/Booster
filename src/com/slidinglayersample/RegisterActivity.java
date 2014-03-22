@@ -55,7 +55,7 @@ public class RegisterActivity extends Activity {
                 String phone = mEditPhone.getText().toString();
                 String dateOfBirth = mEditDateOfBirth.getText().toString();
 
-                User user = new User("1", fullname, nickname, email, password);
+                User user = new User(fullname, nickname, email, password);
                 if (!isEmpty(phone))
                     user.setPhoneNumber(phone);
                 if (!isEmpty(dateOfBirth))
@@ -117,13 +117,13 @@ public class RegisterActivity extends Activity {
         }
 
         @Override
-        protected void onPostExecute(User s) {
+        protected void onPostExecute(User user) {
             if (dlg != null && dlg.isShowing()) {
                 dlg.dismiss();
             }
 
-            if (s.getId() != "-1") {
-                if (User.authorizeUser(s)) {
+            if (!user.getId().equals("-1")) {
+                if (User.authorizeUser(user)) {
                     SuperToast toast = new SuperToast(RegisterActivity.this);
 
                     toast.setText("You are successfully registered :)");
@@ -134,6 +134,7 @@ public class RegisterActivity extends Activity {
                     toast.setTextSize(SuperToast.TextSize.MEDIUM);
                     toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
 
+                    RegisterActivity.this.finish();
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     return;
                 }
@@ -152,5 +153,18 @@ public class RegisterActivity extends Activity {
 
 
         }
+    }
+
+    void showToast(String text, int background) {
+        SuperToast toast = new SuperToast(RegisterActivity.this);
+
+        toast.setText(text);
+        toast.setAnimations(SuperToast.Animations.FADE);
+
+        toast.setDuration(SuperToast.Duration.SHORT);
+        toast.setBackground(background);
+        toast.setTextSize(SuperToast.TextSize.MEDIUM);
+        toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
+
     }
 }

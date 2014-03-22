@@ -61,15 +61,22 @@ public class ServerFetcher {
 
         try {
 
+
             String request = ENDPOINT + "api/auth.signin/?" +
                     "username=" + user.getNickname() + "&" +
                     "password=" + user.getPassword();
 
+
             String response = getUrl(request);
+
+            Log.i("ololo", "authorization   :  " + response);
+
             JSONObject obj = (JSONObject) new JSONTokener(response)
                     .nextValue();
 
             String userId = obj.getString(ID);
+
+            Log.i("ololo", "authorization   :  (" + userId + ")");
 
             return userId;
 
@@ -105,5 +112,11 @@ public class ServerFetcher {
         return null;
     }
 
+    public static String getRegisterUrl(User user) {
+        return ENDPOINT + "api/auth.signup/?" +
+                "username=" + user.getNickname() + "&" +
+                "email=" + user.getEmail() + "&" +
+                "password=" + user.getPassword();
+    }
 
 }

@@ -46,8 +46,7 @@ public class User {
 
     }
 
-    public User(String id, String name, String nickname, String email, String password) {
-        mId = id;
+    public User(String name, String nickname, String email, String password) {
         mName = name;
         mNickname = nickname;
         mEmail = email;

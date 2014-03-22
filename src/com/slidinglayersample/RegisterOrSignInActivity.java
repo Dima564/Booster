@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,6 +77,7 @@ public class RegisterOrSignInActivity extends Activity {
         @Override
         protected User doInBackground(User... params) {
 
+            Log.i("ololo", "  authorization  ");
 
             User user = params[0];
             String result = ServerFetcher.authorizeUser(user);
@@ -86,22 +88,20 @@ public class RegisterOrSignInActivity extends Activity {
         }
 
         @Override
-        protected void onPostExecute(User s) {
+        protected void onPostExecute(User user) {
+
             if (dlg != null && dlg.isShowing()) {
                 dlg.dismiss();
             }
 
-            if (s.getId() != "-1") {
-                if (User.authorizeUser(s)) {
-                    SuperToast toast = new SuperToast(RegisterOrSignInActivity.this);
+            if (!user.getId().equals("-1")) {
+                if (User.authorizeUser(user)) {
 
-                    toast.setText("You are successfully authorized :)");
-                    toast.setAnimations(SuperToast.Animations.FADE);
+                    Log.i("ololo", "Successfully authorized ");
 
-                    toast.setDuration(SuperToast.Duration.SHORT);
-                    toast.setBackground(SuperToast.Background.BLUE);
-                    toast.setTextSize(SuperToast.TextSize.MEDIUM);
-                    toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
+                    showToast("You are successfully authorized :)", SuperToast.Background.BLUE);
+
+                    RegisterOrSignInActivity.this.finish();
 
                     startActivity(new Intent(RegisterOrSignInActivity.this, MainActivity.class));
                     return;
@@ -109,17 +109,21 @@ public class RegisterOrSignInActivity extends Activity {
                 ;
             }
 
-            SuperToast toast = new SuperToast(RegisterOrSignInActivity.this);
-
-            toast.setText("Authorization failed, try again");
-            toast.setAnimations(SuperToast.Animations.FADE);
-
-            toast.setDuration(SuperToast.Duration.SHORT);
-            toast.setBackground(SuperToast.Background.RED);
-            toast.setTextSize(SuperToast.TextSize.MEDIUM);
-            toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
-
+            showToast("Authorization failed, try again", SuperToast.Background.RED);
 
         }
+    }
+
+    void showToast(String text, int background) {
+        SuperToast toast = new SuperToast(RegisterOrSignInActivity.this);
+
+        toast.setText(text);
+        toast.setAnimations(SuperToast.Animations.FADE);
+
+        toast.setDuration(SuperToast.Duration.SHORT);
+        toast.setBackground(background);
+        toast.setTextSize(SuperToast.TextSize.MEDIUM);
+        toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
+
     }
 }
