@@ -83,5 +83,7 @@
     <string name="app_name_drawer">Companies</string>
     <string name="prompt_company_name">company name</string>
     <string name="prompt_description">description</string>
+    <string name="action_archive_company">Archive company</string>
+    <string name="action_new_project">New project</string>
 
 </resources>

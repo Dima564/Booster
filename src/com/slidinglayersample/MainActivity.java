@@ -33,6 +33,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.*;
@@ -59,12 +60,13 @@ public class MainActivity extends Activity {
     private CharSequence mTitle;
 
     private FrameLayout mFrameLayout;
-    private LinearLayout mLinearLayout;
+    private LinearLayout mDrawerLinearLayout;
 
     ListView mListViewCompanies;
     ArrayList<Company> mCompanyArrayList = new ArrayList<Company>();
     CompanyAdapter mCompanyAdapter;
 
+    Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +112,29 @@ public class MainActivity extends Activity {
                 bundle.putSerializable(CompanyProfileActivity.KEY_COMPANY, mCompanyAdapter.getItem(position));
                 i.putExtras(bundle);
 
+
                 startActivity(i);
+
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Perform long-running task here
+                        // (like audio buffering).
+                        // you may want to update some progress
+                        // bar every second, so use handler:
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                // make operation on UI - on example
+                                // on progress bar.
+                                mDrawerLayout.closeDrawer(mDrawerLinearLayout);
+                            }
+                        });
+                    }
+                }).start();
+
+
             }
         });
 
@@ -197,7 +221,7 @@ public class MainActivity extends Activity {
 //        mSlidingLayer = (SlidingLayer) findViewById(R.id.slidingLayer1);
 
         mFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
-        mLinearLayout = (LinearLayout) findViewById(R.id.drawer_linear_layout);
+        mDrawerLinearLayout = (LinearLayout) findViewById(R.id.drawer_linear_layout);
 
         mTitle = getResources().getString(R.string.app_name);
         mDrawerTitle = getResources().getString(R.string.app_name_drawer);
@@ -260,7 +284,7 @@ public class MainActivity extends Activity {
 //    @Override
 //    public boolean onPrepareOptionsMenu(Menu menu) {
 //        If the nav drawer is open, hide action items related to the content view
-//        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mLinearLayout);
+//        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerLinearLayout);
 //        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
 //        return super.onPrepareOptionsMenu(menu);
 //    }

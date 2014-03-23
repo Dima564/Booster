@@ -15,7 +15,7 @@
             android:padding="3dp"
             />
 
-
+                                                                         project_item
     <!-- <com.slidinglayer.SlidingLayer
              android:id="@+id/slidingLayer1"
              android:layout_width="@dimen/layer_width"

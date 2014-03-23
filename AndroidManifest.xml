@@ -87,8 +87,12 @@
         <activity android:name=".CompanyProfileActivity"
                   android:theme="@style/Theme.TranslucentActionBar.ActionBar.Overlay"
                   android:screenOrientation="portrait"
-                />
-
+                  android:parentActivityName="com.slidinglayersample.MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.example.myfirstapp.MainActivity"/>
+        </activity>
 
     </application>
 

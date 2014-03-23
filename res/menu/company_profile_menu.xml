@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        >
+
+    <item
+            android:icon="@android:drawable/ic_menu_add"
+            android:id="@+id/action_new_project"
+            android:showAsAction="ifRoom|withText"
+            android:title="@string/action_new_project"/>
+    <item
+            android:id="@+id/action_settings"
+            android:showAsAction="never"
+            android:title="@string/action_settings"/>
+    <item
+            android:id="@+id/action_sign_out"
+            android:showAsAction="never"
+            android:title= "@string/action_sign_out" />
+
+    <item
+            android:id="@+id/action_archive_company"
+            android:showAsAction="never"
+            android:title= "@string/action_archive_company" />
+    <item
+            android:id="@+id/action_about"
+            android:showAsAction="never"
+            android:title="@string/action_about"/>
+
+
+</menu>

@@ -13,7 +13,7 @@
 
         <include
                 android:id="@+id/image_header"
-                layout="@layout/company_profile_title"
+                layout="@layout/project_profile_title"
                 />
 
         <View
@@ -21,23 +21,22 @@
                 android:layout_height="50dp"
                 android:background="@drawable/gradient"/>
 
-        <include
-                layout="@layout/project_item"/>
+        <ListView
+                android:id="@+id/task_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+        </ListView>
 
         <include
-                layout="@layout/project_item"/>
-
+                layout="@layout/task_simple_item"/>
         <include
-                layout="@layout/project_item"/>
-
+                layout="@layout/task_simple_item"/>
         <include
-                layout="@layout/project_item"/>
-
+                layout="@layout/task_simple_item"/>
         <include
-                layout="@layout/project_item"/>
-
-        <include
-                layout="@layout/project_item"/>
+                layout="@layout/task_simple_item"/>
 
     </LinearLayout>
 </com.slidinglayersample.NotifyingScrollView>
