@@ -47,7 +47,7 @@
                 android:gravity="center"
                 android:paddingLeft="15dp"
                 android:layout_height="wrap_content"
-                android:minHeight="10dp"
+                android:minHeight="85dp"
 
                 />
         <View

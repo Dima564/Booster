@@ -8,6 +8,17 @@
 
         >
 
+    <ImageView
+            android:id="@+id/img_photo"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:text="@string/hello_world"
+            android:src="@drawable/grant_diagram_new"
+
+            android:layout_marginBottom="5dp"
+            />
+
+
     <ListView
             android:id="@+id/task_list_view"
             android:layout_width="match_parent"

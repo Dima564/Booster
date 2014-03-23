@@ -11,18 +11,39 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <ImageView
+        <include
                 android:id="@+id/image_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/blue_vacation_desktop"/>
+                layout="@layout/company_profile_title"/>
 
         <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:background="@drawable/gradient"/>
 
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
+        <include
+                layout="@layout/company_item"/>
 
     </LinearLayout>
 </com.slidinglayersample.NotifyingScrollView>

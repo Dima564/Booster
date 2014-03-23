@@ -45,7 +45,7 @@
                 android:padding="2dp"
                 android:layout_margin="3dp"
                 android:textSize="15dp"
-                android:text="I'm cool company\nProjects : 10\nTasks : 27"
+                android:text="Creator : Andriy Bas\nProjects : 14\nI'm cool company, bro"
                 />
     </LinearLayout>
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ScrollView;
 
 /**
@@ -11,6 +12,8 @@ import android.widget.ScrollView;
  * @since 3/23/14 12:50 AM
  */
 public class CompanyProfileActivity extends Activity {
+
+    public static final String KEY_COMPANY = "oyster.company";
 
     private Drawable mActionBarBackgroundDrawable;
 
@@ -31,12 +34,31 @@ public class CompanyProfileActivity extends Activity {
         }
     };
 
+
+    private Company mCompany;
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.company_profile_activity);
 
-        mActionBarBackgroundDrawable = getResources().getDrawable(R.drawable.background_kitkat_orange/*R.drawable.ab_background*/);
+        mActionBarBackgroundDrawable = getResources().getDrawable(R.drawable.gradient_action_bar/*R.drawable.ab_background*/);
         mActionBarBackgroundDrawable.setAlpha(0);
 
         getActionBar().setBackgroundDrawable(mActionBarBackgroundDrawable);
@@ -46,6 +68,13 @@ public class CompanyProfileActivity extends Activity {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
             mActionBarBackgroundDrawable.setCallback(mDrawableCallback);
         }
+
+
+        Bundle bundle = getIntent().getExtras();
+        mCompany = (Company) bundle.getSerializable(KEY_COMPANY);
+
+        setTitle(mCompany.getName());
+
     }
 
     private NotifyingScrollView.OnScrollChangedListener mOnScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
@@ -56,7 +85,6 @@ public class CompanyProfileActivity extends Activity {
             mActionBarBackgroundDrawable.setAlpha(newAlpha);
         }
     };
-
 
 
 }

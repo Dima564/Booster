@@ -86,7 +86,6 @@ public class MainActivity extends Activity {
                     .add(R.id.content_frame, fragment)
                     .commit();
         }
-
     }
 
     public void initState() {
@@ -94,7 +93,9 @@ public class MainActivity extends Activity {
         mListViewCompanies = (ListView) findViewById(R.id.listViewCompany);
 
         for (int i = 0; i < 10; i++) {
-            mCompanyArrayList.add(new Company());
+            Company c = new Company();
+            c.setName("Company Name");
+            mCompanyArrayList.add(c);
         }
 
         mCompanyAdapter = new CompanyAdapter(mCompanyArrayList);
@@ -103,7 +104,13 @@ public class MainActivity extends Activity {
         mListViewCompanies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(MainActivity.this, CompanyProfileActivity.class));
+
+                Intent i = new Intent(MainActivity.this, CompanyProfileActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(CompanyProfileActivity.KEY_COMPANY, mCompanyAdapter.getItem(position));
+                i.putExtras(bundle);
+
+                startActivity(i);
             }
         });
 
@@ -356,7 +363,7 @@ public class MainActivity extends Activity {
 
 
             String descr = "Creator : " + c.getCreatorId()
-                    + "\nProjects : 7" +
+                    + "\nProjects : 14" +
                     "\n" + c.getDescription();
 
             ((TextView) convertView.findViewById(R.id.company_description)).setText(descr);
