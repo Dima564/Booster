@@ -24,13 +24,13 @@
 <resources>
 
     <string name="app_name">Booster</string>
-    
+
     <string name="pref_title_stick_container">Stick layer to</string>
     <string name="pref_title_show_shadow">Show shadow</string>
     <string name="pref_title_show_offset">Closed offset</string>
     <string name="open_button_container">Open</string>
     <string name="close_button_container">Close</string>
-    
+
     <string name="swipe_label">Swipe!</string>
     <string name="swipe_left_label">Swipe left!</string>
     <string name="swipe_right_label">Swipe right!</string>
@@ -44,7 +44,7 @@
     <string name="label_bottom">Bottom</string>
 
     <string name="not_applicable">n/a</string>
-    
+
     <string-array name="pref_list_titles">
         <item>@string/label_right</item>
         <item>@string/label_middle</item>
@@ -52,6 +52,7 @@
         <item>@string/label_top</item>
         <item>@string/label_bottom</item>
     </string-array>
+
     <string-array name="pref_list_values">
         <item>right</item>
         <item>middle</item>
@@ -85,5 +86,36 @@
     <string name="prompt_description">description</string>
     <string name="action_archive_company">Archive company</string>
     <string name="action_new_project">New project</string>
+    <string name="action_new_task">New task</string>
+    <string name="action_archive_project">Archive project</string>
+
+
+    <string-array name="company_names">
+        <item>Oyster</item>
+        <item>EPAM</item>
+        <item>GlobalLogic</item>
+        <item>Luxoft</item>
+        <item>Grammarly</item>
+        <item>IntelTechno</item>
+    </string-array>
+
+
+    <string-array name="project_names">
+        <item>User interface</item>
+        <item>Server optimization</item>
+        <item>Documenting</item>
+        <item>Log in fix</item>
+        <item>Security bug fix</item>
+    </string-array>
+
+
+    <string-array name="task_names">
+        <item>right</item>
+        <item>middle</item>
+        <item>left</item>
+        <item>top</item>
+        <item>bottom</item>
+    </string-array>
+
 
 </resources>

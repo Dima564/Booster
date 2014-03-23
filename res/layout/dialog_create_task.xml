@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/LoginFormContainer"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        >
+
+    <EditText
+            android:id="@+id/reg_task_name"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="task name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:layout_margin="5dp"
+
+            android:singleLine="true"/>
+
+    <EditText
+            android:id="@+id/reg_task_description"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/prompt_description"
+            android:inputType="text"
+            android:maxLines="1"
+            android:layout_margin="5dp"
+
+            />
+
+    <EditText
+            android:id="@+id/reg_task_start_date"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="start date"
+            android:inputType="date"
+            android:maxLines="1"
+            android:layout_margin="5dp"
+
+            />
+
+    <EditText
+            android:id="@+id/reg_task_due_date"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="due date"
+            android:inputType="date"
+            android:maxLines="1"
+            android:layout_margin="5dp"
+
+            />
+
+    <EditText
+            android:id="@+id/reg_task_points"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="points"
+            android:inputType="number"
+            android:maxLines="1"
+            android:layout_margin="5dp"
+
+            />
+</LinearLayout>

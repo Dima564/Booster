@@ -8,6 +8,9 @@
         android:layout_height="wrap_content"
         style="@style/nowCardStyle"
         android:minHeight="130dp"
+
+        android:onClick="onProjectClick"
+
         >
 
     <LinearLayout

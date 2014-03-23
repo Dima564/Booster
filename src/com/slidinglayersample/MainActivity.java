@@ -25,13 +25,11 @@
 
 package com.slidinglayersample;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.app.*;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -67,6 +65,7 @@ public class MainActivity extends Activity {
     CompanyAdapter mCompanyAdapter;
 
     Handler mHandler = new Handler();
+    private ProgressDialog dlg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +87,10 @@ public class MainActivity extends Activity {
                     .add(R.id.content_frame, fragment)
                     .commit();
         }
+
+        Button t1 = (Button) findViewById(R.id.txtProfile);
+        t1.setText(User.getCurrentUser().getName() + "\n" + User.getCurrentUser().getEmail());
+
     }
 
     public void initState() {
@@ -183,10 +186,19 @@ public class MainActivity extends Activity {
                         c.setDescription(desc.getText().toString());
                         c.setCreatorId(User.getCurrentUser().getId());
 
-                        mCompanyArrayList.add(c);
-                        mCompanyAdapter.notifyDataSetChanged();
+//                        mCompanyArrayList.add(c);
+//                        mCompanyAdapter.notifyDataSetChanged();
 
-                        showToast("Added company : " + c.getName(), SuperToast.Background.BLUE);
+
+                        dlg = new ProgressDialog(MainActivity.this);
+                        dlg.setTitle("Please wait.");
+                        dlg.setMessage("Company registration.  Please wait.");
+                        dlg.show();
+
+                        new RegisterCompany().execute(c);
+
+
+//                        showToast("Added company : " + c.getName(), SuperToast.Background.BLUE);
 //                        Toast.makeText(getApplicationContext(), mSelectedItems.size(), Toast.LENGTH_LONG).show();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -416,4 +428,60 @@ public class MainActivity extends Activity {
 
         toast.show();
     }
+
+
+    class RegisterCompany extends AsyncTask<Company, Void, Company> {
+
+        @Override
+        protected Company doInBackground(Company... params) {
+
+
+            Company c = params[0];
+            String result = ServerFetcher.registerCompany(c);
+
+            c.setId(result);
+
+            return c;
+        }
+
+        @Override
+        protected void onPostExecute(Company c) {
+            if (dlg != null && dlg.isShowing()) {
+                dlg.dismiss();
+            }
+
+            if (!c.getId().equals("-1")) {
+
+                SuperToast toast = new SuperToast(MainActivity.this);
+
+                toast.setText("Company successfully registered :)");
+                toast.setAnimations(SuperToast.Animations.FADE);
+
+                toast.setDuration(SuperToast.Duration.SHORT);
+                toast.setBackground(SuperToast.Background.BLUE);
+                toast.setTextSize(SuperToast.TextSize.MEDIUM);
+                toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
+
+                mCompanyArrayList.add(c);
+                mCompanyAdapter.notifyDataSetChanged();
+
+                return;
+
+            }
+
+            SuperToast toast = new SuperToast(MainActivity.this);
+
+            toast.setText("Registration failed, try again");
+            toast.setAnimations(SuperToast.Animations.FADE);
+
+            toast.setDuration(SuperToast.Duration.SHORT);
+            toast.setBackground(SuperToast.Background.RED);
+            toast.setTextSize(SuperToast.TextSize.MEDIUM);
+            toast.setIcon(SuperToast.Icon.Light.INFO, SuperToast.IconPosition.LEFT);
+
+
+        }
+    }
+
 }
+

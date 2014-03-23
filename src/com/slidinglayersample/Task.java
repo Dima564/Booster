@@ -1,10 +1,12 @@
 package com.slidinglayersample;
 
+import java.io.Serializable;
+
 /**
  * @author bamboo
  * @since 3/22/14 7:54 AM
  */
-public class Task extends BasicTask {
+public class Task extends BasicTask implements Serializable {
 
     private long mStartDate;
 

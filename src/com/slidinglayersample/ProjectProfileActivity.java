@@ -18,9 +18,9 @@ import java.util.ArrayList;
  * @author bamboo
  * @since 3/23/14 12:50 AM
  */
-public class CompanyProfileActivity extends Activity {
+public class ProjectProfileActivity extends Activity {
 
-    public static final String KEY_COMPANY = "oyster.company";
+    public static final String KEY_PROJECT = "oyster.project";
 
     private Drawable mActionBarBackgroundDrawable;
 
@@ -42,12 +42,12 @@ public class CompanyProfileActivity extends Activity {
     };
 
 
-    private Company mCompany;
+    private Project mProject;
 
 
-    ListView mListViewProjects;
-    ArrayList<Project> mProjectArrayList = new ArrayList<Project>();
-    ProjectAdapter mProjectAdapter;
+    ListView mListViewTasks;
+    ArrayList<Task> mTaskArrayList = new ArrayList<Task>();
+    TaskAdapter mTaskAdapter;
 
   /*  @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -67,7 +67,8 @@ public class CompanyProfileActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.company_profile_activity);
+        setContentView(R.layout.project_profile_activity);
+
 
         mActionBarBackgroundDrawable = getResources().getDrawable(R.drawable.gradient_action_bar/*R.drawable.ab_background*/);
         mActionBarBackgroundDrawable.setAlpha(0);
@@ -82,54 +83,38 @@ public class CompanyProfileActivity extends Activity {
 
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            mCompany = (Company) bundle.getSerializable(KEY_COMPANY);
+        mProject = (Project) bundle.getSerializable(KEY_PROJECT);
 
-            setTitle(mCompany.getName());
-        } else {
-            setTitle("Grammarly");
-        }
-
-//        mListViewProjects = (ListView) findViewById(R.id.project_list_view);
-
-        // initState();
-
-    }
-
-    public void onProjectClick(View v) {
-
-        Intent i = new Intent(CompanyProfileActivity.this, ProjectProfileActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(ProjectProfileActivity.KEY_PROJECT, new Project());
-        i.putExtras(bundle);
+        setTitle(mProject.getName());
 
 
-        startActivity(i);
+//        mListViewTasks = (ListView) findViewById(R.id.task_list_view);
+//        initState();
+
     }
 
     private void initState() {
 
-
         for (int i = 0; i < 10; i++) {
-            Project c = new Project();
+            Task c = new Task();
             // c.setName("Company Name");
-            mProjectArrayList.add(c);
+            mTaskArrayList.add(c);
         }
 
-        mProjectAdapter = new ProjectAdapter(mProjectArrayList);
-        mListViewProjects.setAdapter(mProjectAdapter);
+        mTaskAdapter = new TaskAdapter(mTaskArrayList);
+        mListViewTasks.setAdapter(mTaskAdapter);
 
-        mListViewProjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListViewTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent i = new Intent(CompanyProfileActivity.this, CompanyProfileActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(CompanyProfileActivity.KEY_COMPANY, mProjectAdapter.getItem(position));
-                i.putExtras(bundle);
-
-
-                startActivity(i);
+//                Intent i = new Intent(ProjectProfileActivity.this, TaskProfileActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable(ProjectProfileActivity.KEY_PROJECT, mTaskAdapter.getItem(position));
+//                i.putExtras(bundle);
+//
+//
+//                startActivity(i);
             }
         });
     }
@@ -154,25 +139,26 @@ public class CompanyProfileActivity extends Activity {
 
             case R.id.action_sign_out:
                 User.signOutUser();
-                CompanyProfileActivity.this.finish();
-                startActivity(new Intent(CompanyProfileActivity.this, RegisterOrSignInActivity.class));
+                ProjectProfileActivity.this.finish();
+                startActivity(new Intent(ProjectProfileActivity.this, RegisterOrSignInActivity.class));
                 return true;
 
-            case R.id.action_new_project:
+            case R.id.action_new_task:
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(CompanyProfileActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProjectProfileActivity.this);
 
-                LayoutInflater inflater = CompanyProfileActivity.this.getLayoutInflater();
-                final View v = inflater.inflate(R.layout.dialog_create_project, null, false);
+                LayoutInflater inflater = ProjectProfileActivity.this.getLayoutInflater();
+                final View v = inflater.inflate(R.layout.dialog_create_task, null, false);
                 builder.setView(v);
 
-                builder.setTitle("Add project");
+                builder.setTitle("Add task");
 
 
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                       /* Company c = new Company();
+/*
+                        Company c = new Company();
 
                         EditText name = (EditText) v.findViewById(R.id.reg_company_name);
                         EditText desc = (EditText) v.findViewById(R.id.reg_company_description);
@@ -181,14 +167,15 @@ public class CompanyProfileActivity extends Activity {
                         c.setName(name.getText().toString());
                         c.setDescription(desc.getText().toString());
                         c.setCreatorId(User.getCurrentUser().getId());
-*/
+
 //                        mCompanyArrayList.add(c);
 //                        mCompanyAdapter.notifyDataSetChanged();
-
+                                   */
                         String s = ((EditText) v.findViewById(R.id.reg_task_name)).getText().toString();
 
-                        showToast("Added project : " + s, SuperToast.Background.BLUE);
+                        showToast("Added task : " + s, SuperToast.Background.BLUE);
 //                        Toast.makeText(getApplicationContext(), mSelectedItems.size(), Toast.LENGTH_LONG).show();
+
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -210,13 +197,13 @@ public class CompanyProfileActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.company_profile_menu, menu);
+        getMenuInflater().inflate(R.menu.project_profile_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
 
     void showToast(String text, int background) {
-        SuperToast toast = new SuperToast(CompanyProfileActivity.this);
+        SuperToast toast = new SuperToast(ProjectProfileActivity.this);
 
         toast.setText(text);
         toast.setAnimations(SuperToast.Animations.FADE);
@@ -230,11 +217,11 @@ public class CompanyProfileActivity extends Activity {
     }
 
 
-    class ProjectAdapter extends ArrayAdapter<Project> {
+    class TaskAdapter extends ArrayAdapter<Task> {
 
 
-        public ProjectAdapter(ArrayList<Project> array) {
-            super(CompanyProfileActivity.this, 0, array);
+        public TaskAdapter(ArrayList<Task> array) {
+            super(ProjectProfileActivity.this, 0, array);
         }
 
         @Override
@@ -242,16 +229,16 @@ public class CompanyProfileActivity extends Activity {
 
             if (convertView == null) {
                 convertView = getLayoutInflater()
-                        .inflate(R.layout.project_item, parent, false);
+                        .inflate(R.layout.task_simple_item, parent, false);
             }
 
-            Project c = getItem(position);
+            Task c = getItem(position);
               /*
             ((TextView) convertView.findViewById(R.id.compny_title)).setText(c.getName());
 
 
             String descr = "Creator : " + c.getCreatorId()
-                    + "\nProjects : 14" +
+                    + "\nTasks : 14" +
                     "\n" + c.getDescription();
 
             ((TextView) convertView.findViewById(R.id.company_description)).setText(descr);
@@ -261,7 +248,7 @@ public class CompanyProfileActivity extends Activity {
 
         @Override
         public int getCount() {
-            return mProjectArrayList.size();
+            return mTaskArrayList.size();
         }
 
 

@@ -34,6 +34,8 @@ public class MainFragment extends Fragment {
         mListViewTask = (ListView) v.findViewById(R.id.task_list_view);
         initState();
 
+
+
         return v;
     }
 

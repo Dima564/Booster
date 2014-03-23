@@ -22,7 +22,7 @@ public class ServerFetcher {
 
     public static final String PREF_LAST_RESULT_ID = "lastResultId";
 
-    public static final String ENDPOINT = "http://192.168.1.105:8000/";
+    public static final String ENDPOINT = "http://192.168.1.114:8000/";
 
     public static final String ID = "id";
 
@@ -109,7 +109,7 @@ public class ServerFetcher {
             Log.e(TAG, "Failed to register user", e);
         }
 
-        return null;
+        return "-1";
     }
 
     public static String getRegisterUrl(User user) {
@@ -117,6 +117,30 @@ public class ServerFetcher {
                 "username=" + user.getNickname() + "&" +
                 "email=" + user.getEmail() + "&" +
                 "password=" + user.getPassword();
+    }
+
+    public static String registerCompany(Company c) {
+
+        try {
+
+            String request = ENDPOINT + "api/company.create/?" +
+                    "id=" + c.getCreatorId() + "&" +
+                    "name=" + c.getName() + "&" +
+                    "info=" + c.getDescription();
+
+            String response = getUrl(request);
+            JSONObject obj = (JSONObject) new JSONTokener(response)
+                    .nextValue();
+
+            String userId = obj.getString(ID);
+
+            return userId;
+
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to register user", e);
+        }
+
+        return "-1";
     }
 
 }

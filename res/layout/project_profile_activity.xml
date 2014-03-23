@@ -21,14 +21,30 @@
                 android:layout_height="50dp"
                 android:background="@drawable/gradient"/>
 
-        <ListView
+      <!--  <ListView
                 android:id="@+id/task_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
 
-        </ListView>
+        </ListView>-->
 
+        <include
+                layout="@layout/task_simple_item"/>
+        <include
+                layout="@layout/task_simple_item"/>
+        <include
+                layout="@layout/task_simple_item"/>
+        <include
+                layout="@layout/task_simple_item"/>
+        <include
+                layout="@layout/task_simple_item"/>
+        <include
+                layout="@layout/task_simple_item"/>
+        <include
+                layout="@layout/task_simple_item"/>
+        <include
+                layout="@layout/task_simple_item"/>
         <include
                 layout="@layout/task_simple_item"/>
         <include
