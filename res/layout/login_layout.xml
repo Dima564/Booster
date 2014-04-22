@@ -30,8 +30,6 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:layout_margin="5dp"
-
-
                     android:singleLine="true"
 
                     />

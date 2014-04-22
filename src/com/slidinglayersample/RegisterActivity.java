@@ -40,7 +40,6 @@ public class RegisterActivity extends Activity {
         mEditDateOfBirth = (EditText) findViewById(R.id.reg_birth_date);
 
         mEditNickname.setText(getIntent().getStringExtra(RegisterOrSignInActivity.KEY_NICKNAME));
-
         mEditPassword.setText(getIntent().getStringExtra(RegisterOrSignInActivity.KEY_PSSWORD));
 
         final Button btnRegister = (Button) findViewById(R.id.btnRegister);

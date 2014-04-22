@@ -20,7 +20,7 @@ public class RegisterOrSignInActivity extends Activity {
 
     public static final String KEY_NICKNAME = "oyster.nickname";
     public static final String KEY_PSSWORD = "oyster.nickname";
-    private ProgressDialog dlg;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,6 @@ public class RegisterOrSignInActivity extends Activity {
     }
 
     class AuthorizeUserTask extends AsyncTask<User, Void, User> {
-
         @Override
         protected User doInBackground(User... params) {
 
